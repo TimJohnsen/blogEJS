@@ -1,35 +1,39 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 
 app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
 
+app.use(bodyParser.urlencoded({extended: false}));
+
 
 app.get('/blog', (req, res) => {  //Retrieve all blog posts
-    res.render('index', {listBlogs: blogs   //Do not specify path details or file type
+    res.render('blog', {listBlogs: blogs   //Do not specify path details or file type
     })
 })
 
 app.get('/blog/:blogid', (req, res) => {   //Retrieve one blog post
     res.render('index', {   //Do not specify path details or file type
-        user
     })
 })
 
 app.post('/blog', (req, res) => {
-    //Create new post
+    console.log(req.body);
     let blog = req.body;
-    blogs.push(new BlogPost(blog.idx, blog.title, blog.summary, blog.content, blog.author, blog.created));
+    blogs.push(new BlogPost(blog.title, blog.summary, blog.content, blog.author, new Date()));
     res.redirect('/blog');
 })
 
 app.delete('/blog/:blogid', (req, res) => {    //Delete and existing post
     res.render('index', {   //Do not specify path details or file type
-        user
     })
 })
 
+app.get('/addpost', (req, res) => {
+    res.render('addpost');
+})
 
 
 app.listen(8080, function () {
@@ -57,8 +61,7 @@ let blogs = [
 ]
 
 //Constructor
-function BlogPost(idx, title, summary, content, author, created) {
-    this.idx = idx,
+function BlogPost(title, summary, content, author, created) {
     this.title = title,
     this.summary = summary,
     this.content = content,

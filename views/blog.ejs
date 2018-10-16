@@ -1,0 +1,11 @@
+<% include partials/header %>
+
+
+        <% for (let i=0; i<listBlogs.length; i++) { %>
+        <h1><%= listBlogs[i].title %></h1>
+        <h2><%= listBlogs[i].author %></h2>
+        <p><%= listBlogs[i].content %></p>
+        <a href=''>Read More</a>  //XXXXX
+        <% } %>
+<a href='/addpost'>Add new post</a>
+<% include partials/footer %>
